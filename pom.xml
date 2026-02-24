@@ -27,7 +27,8 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.7.0</version>
+            <version>5.6.3</version> <!-- Используйте актуальную версию -->
+            <scope>test</scope> <!-- Если WebDriverFactory используется только для тестов -->
         </dependency>
 
         <!-- JUnit 4 -->

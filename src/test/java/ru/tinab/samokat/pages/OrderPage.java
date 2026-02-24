@@ -13,9 +13,8 @@ public class OrderPage extends BasePage {
         super(driver);
     }
 
-    // ==========================
     // Локаторы — Шаг 1
-    // ==========================
+
     private final By nameField =
             By.xpath("//input[@placeholder='* Имя']");
 
@@ -34,9 +33,8 @@ public class OrderPage extends BasePage {
     private final By nextButton =
             By.xpath("//button[contains(@class,'Button_Middle__1CSJM')]");
 
-    // ==========================
     // Локаторы — Шаг 2
-    // ==========================
+
     private final By dateField =
             By.xpath("//input[@placeholder='* Когда привезти самокат']");
 
@@ -53,7 +51,7 @@ public class OrderPage extends BasePage {
             By.xpath("(//button[contains(@class,'Button_Middle__1CSJM')])[2]");
 
     private final By orderConfirmationModal =
-            By.cssSelector("div.Order_Modal__YZ-d3");
+            By.xpath("//div[contains(@class,'Modal')]//button[contains(text(),'Да')]");
 
     private final By datePicker =
             By.className("react-datepicker");
@@ -61,9 +59,7 @@ public class OrderPage extends BasePage {
     private final By metroOptions =
             By.className("select-search__option");
 
-    // ==========================
     // Методы — Шаг 1
-    // ==========================
 
     public void fillName(String name) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(nameField))
@@ -85,10 +81,10 @@ public class OrderPage extends BasePage {
         input.click();
         input.sendKeys(metro);
 
-        // ждём появления вариантов метро
+        // Ждём появления вариантов метро
         wait.until(driver -> !driver.findElements(metroOptions).isEmpty());
 
-        // выбираем первый вариант
+        // Выбираем первый вариант
         input.sendKeys(Keys.ARROW_DOWN);
         input.sendKeys(Keys.ENTER);
     }
@@ -103,9 +99,7 @@ public class OrderPage extends BasePage {
                 .click();
     }
 
-    // ==========================
     // Методы — Шаг 2
-    // ==========================
 
     public void fillDate(String date) {
         WebElement dateInput =
@@ -115,7 +109,7 @@ public class OrderPage extends BasePage {
         dateInput.sendKeys(date);
         dateInput.sendKeys(Keys.ENTER);
 
-        // ждём, пока календарь закроется
+        // Ждём, пока календарь закроется
         wait.until(ExpectedConditions.invisibilityOfElementLocated(datePicker));
     }
 
@@ -151,9 +145,7 @@ public class OrderPage extends BasePage {
                 .click();
     }
 
-    // ==========================
     // Проверка результата
-    // ==========================
 
     public boolean isOrderConfirmed() {
         return wait.until(
