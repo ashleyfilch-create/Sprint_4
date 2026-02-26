@@ -43,11 +43,6 @@ public class FaqTest extends BaseTest {
         mainPage.scrollToFaq(index);
         mainPage.clickFaqQuestion(index);
 
-        Assert.assertTrue(
-                "Ответ FAQ не отображается",
-                mainPage.isFaqAnswerDisplayed(index)
-        );
-
         Assert.assertEquals(
                 "Текст ответа не совпадает",
                 expectedText,

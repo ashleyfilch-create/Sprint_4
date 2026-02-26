@@ -63,6 +63,10 @@ public class OrderTest extends BaseTest {
         orderPage.fillComment(comment);
         orderPage.clickOrder();
 
+        // === ДОБАВЛЕНО: подтверждение заказа ===
+        orderPage.confirmOrder();
+
+        // Проверяем, что появилось финальное окно "Заказ оформлен"
         Assert.assertTrue(
                 "Заказ не был подтверждён",
                 orderPage.isOrderConfirmed()
