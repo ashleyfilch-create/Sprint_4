@@ -21,7 +21,7 @@ public class MainPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    // ===== ЛОКАТОРЫ =====
+    // Локаторы для главной страницы.
 
     // Верхняя кнопка «Заказать»
     private final By topOrderButton =
@@ -39,7 +39,7 @@ public class MainPage {
         return By.id("accordion__panel-" + index);
     }
 
-    // ===== МЕТОДЫ =====
+    // Методы для главной страницы.
 
     public void openPage() {
         driver.get(BASE_URL);

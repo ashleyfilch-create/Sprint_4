@@ -35,21 +35,48 @@ public class OrderTest extends BaseTest {
         this.comment = comment;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Тест #{index}: {0} {1}")
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
-                {"Анна", "Иванова", "Москва, Тверская 1", "Бульвар Рокоссовского", "79999999999", "20.02.2026", "сутки", "Позвоните заранее"},
-                {"Иван", "Петров", "Москва, Арбат 5", "Сокольники", "78888888888", "22.02.2026", "двое суток", "Оставьте у двери"}
+                {
+                        "Анна",
+                        "Иванова",
+                        "Москва, Тверская 1",
+                        "Бульвар Рокоссовского",
+                        "79999999999",
+                        "20.02.2026",
+                        "сутки",
+                        "Позвоните заранее"
+                },
+                {
+                        "Иван",
+                        "Петров",
+                        "Москва, Арбат 5",
+                        "Сокольники",
+                        "78888888888",
+                        "22.02.2026",
+                        "двое суток",
+                        "Оставьте у двери"
+                }
         });
     }
 
     @Test
     public void testPositiveOrderFlow() {
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickTopOrderButton();
 
+        MainPage mainPage = new MainPage(driver);
         OrderPage orderPage = new OrderPage(driver);
 
+        // 1. Открываем главную страницу.
+        mainPage.openPage();
+
+        // 2. Закрываем cookie-баннер (если есть).
+        mainPage.closeCookieBanner();
+
+        // 3. Нажимаем кнопку "Заказать".
+        mainPage.clickTopOrderButton();
+
+        // Шаг 1.
         orderPage.fillName(name);
         orderPage.fillSurname(surname);
         orderPage.fillAddress(address);
@@ -57,18 +84,25 @@ public class OrderTest extends BaseTest {
         orderPage.fillPhone(phone);
         orderPage.clickNext();
 
+        // Шаг 2.
         orderPage.fillDate(date);
         orderPage.selectRentalPeriod(period);
         orderPage.chooseBlackColor();
         orderPage.fillComment(comment);
         orderPage.clickOrder();
 
-        // === ДОБАВЛЕНО: подтверждение заказа ===
+        // 4. Проверяем, что появилось окно "Хотите оформить заказ?".
+        Assert.assertTrue(
+                "Окно подтверждения заказа не появилось",
+                orderPage.isOrderConfirmationModalDisplayed()
+        );
+
+        // 5. Подтверждаем заказ.
         orderPage.confirmOrder();
 
-        // Проверяем, что появилось финальное окно "Заказ оформлен"
+        // 6. Проверяем, что заказ оформлен.
         Assert.assertTrue(
-                "Заказ не был подтверждён",
+                "Заказ не был оформлен",
                 orderPage.isOrderConfirmed()
         );
     }
