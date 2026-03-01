@@ -15,11 +15,20 @@
     </properties>
 
     <dependencies>
+
         <!-- Selenium -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.16.1</version>
+        </dependency>
+
+        <!-- WebDriverManager -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.6.3</version> <!-- Используйте актуальную версию -->
+            <scope>test</scope> <!-- Если WebDriverFactory используется только для тестов -->
         </dependency>
 
         <!-- JUnit 4 -->
@@ -29,5 +38,6 @@
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 </project>

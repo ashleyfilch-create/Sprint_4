@@ -1,0 +1,15 @@
+.idea/
+
+.mvn/
+
+target/
+
+/*
+
+!/src/
+
+!/README.md
+
+!.gitignore
+
+!/pom.xml
